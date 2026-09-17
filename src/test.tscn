@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cn67gecooprai"]
+
+[ext_resource type="Script" uid="uid://b6r58lqrt20i5" path="res://TTEA_COMM.gd" id="1_37kl0"]
+
+[node name="Node2D" type="Node2D" unique_id=870698062]
+script = ExtResource("1_37kl0")
+
+[node name="Button" type="Button" parent="." unique_id=539750959]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "AAAAAAAAAAAAAAAAAAAAA"
