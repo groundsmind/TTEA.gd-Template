@@ -24,8 +24,8 @@ if inicio_da_sessao==False:
 #################################### Hardware ###################################
 #################################################################################
 # Tamanho das Telas:
-largura_projetor = 800  # A ltere este valor de acordo com a resolução da projeção do jogo.
-altura_projetor = 600  # A ltere este valor de acordo com a resolução da projeção do jogo.
+largura_projetor = 800  # Altere este valor de acordo com a resolução da projeção do jogo.
+altura_projetor = 600  # Altere este valor de acordo com a resolução da projeção do jogo.
 largura_tela_controle = 640  # Esta tela é usada pelo terapeuta/operador. Altere o valor caso necessário.
 altura_tela_controle = 480  # Esta tela é usada pelo terapeuta/operador. Altere o valor caso necessário.
 relacao_largura = (largura_projetor / largura_tela_controle)  # Esta relação é usada na correção de perspectiva.
@@ -65,7 +65,6 @@ branco = 255, 255, 255
 preto = 0, 0, 0
 
 fonte = cv2.FONT_HERSHEY_SIMPLEX
-font = pygame.font.SysFont(None, 25)
 
 #################################################################################
 ############################# VARIÁVEIS DE PROGRAMA #############################
@@ -73,15 +72,6 @@ font = pygame.font.SysFont(None, 25)
 pontos_calibracao = np.zeros((4, 2), int)  # Matriz para os pontos de calibração de perspectiva - 4 linhas/ 2 colunas
 contador = 0  # Contador utilizado nos 4 pontos de calibração
 figura_selecionada=False # Usada para evitar que o usuário apenas selecione uma vez a figura e não ficar piscando
-lista_sorteio=[] #São as figuras sorteadas pelo computador e colocadas nesta lista, para depois fazer a comparação com as escolhas do usuário
-pontuacao=0 # Pontos conseguidos em durante a rodada
-tempo_ajuda=5 # Tempo até a ajuda aparecer
-tempo_total=10 # Tempo máximo da jogada
-atencao_memorizar=False
-hud_switch=True
-pausa_switch=False
-tempo_ajuda_switch=False
-tentativa=1
 x_pose = 0
 y_pose = 0
 

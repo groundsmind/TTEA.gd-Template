@@ -24,7 +24,7 @@ class Control():
             print("Câmera indisponível")
 
     
-    def process_image(self):
+    def track(self):
         if self.cap is None:
             print("Câmera indisponível")
             return ((None, None), (None, None))

@@ -34,7 +34,7 @@ tamanho_tela = 800, 600
 fps = 60
 
 # Variáveis do Pygame
-WINDOW_NAME = "Kairos"
+WINDOW_NAME = "CIT"
 GAME_TITLE = WINDOW_NAME
 CAMERA = 0
 CAMERA_FLIP = 0
