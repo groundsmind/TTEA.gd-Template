@@ -9,3 +9,13 @@ script = ExtResource("1_37kl0")
 offset_right = 8.0
 offset_bottom = 8.0
 text = "AAAAAAAAAAAAAAAAAAAAA"
+
+[node name="Button2" type="Button" parent="." unique_id=688634646]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "AAAAAAAAAAAAAAAAAAAAA"
+
+[node name="Button3" type="Button" parent="." unique_id=798228778]
+offset_right = 8.0
+offset_bottom = 8.0
+text = "AAAAAAAAAAAAAAAAAAAAA"
