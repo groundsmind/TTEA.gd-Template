@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cn67gecooprai"]
+
+[sub_resource type="GDScript" id="GDScript_vsb4k"]
+resource_name = "MenuButtons"
+script/source = "extends HBoxContainer
+
+@onready var calibrate: Button = $calibrate
+
+func _on_start_toggled(toggled_on: bool) -> void:
+	pass # Replace with function body.
+
+func _on_calibrate_pressed() -> void:
+	TteaComm.send_data(\"CAL\")
+	calibrate.disabled = true
+
+func _on_exit_pressed() -> void:
+	TteaComm.send_data(\"EXT\")
+	get_tree().quit()
+"
+
+[node name="Node2D" type="Node2D" unique_id=870698062]
+
+[node name="Label" type="Label" parent="." unique_id=61518536]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 254.0
+offset_top = 40.0
+offset_right = 560.0
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 122
+text = "treco"
+
+[node name="MenuButtons" type="HBoxContainer" parent="." unique_id=483359193]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 103.0
+offset_top = 473.0
+offset_right = 719.0
+offset_bottom = 518.0
+grow_horizontal = 2
+grow_vertical = 2
+script = SubResource("GDScript_vsb4k")
+
+[node name="start" type="Button" parent="MenuButtons" unique_id=484011405]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "começar jogo"
+
+[node name="calibrate" type="Button" parent="MenuButtons" unique_id=544874297]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "calibrar"
+
+[node name="exit" type="Button" parent="MenuButtons" unique_id=1062811593]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "sair"
+
+[connection signal="toggled" from="MenuButtons/start" to="MenuButtons" method="_on_start_toggled"]
+[connection signal="pressed" from="MenuButtons/calibrate" to="MenuButtons" method="_on_calibrate_pressed"]
+[connection signal="pressed" from="MenuButtons/exit" to="MenuButtons" method="_on_exit_pressed"]

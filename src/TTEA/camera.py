@@ -25,7 +25,6 @@ class Camera:
             self.raw_frame = None
             return
 
-        self.frame = cv2.flip(self.frame, 1)
         self.raw_frame = self.frame.copy()
 
         cv2.line(

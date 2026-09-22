@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://c1pp1kel30348"]
+
+[ext_resource type="Script" uid="uid://2w8odxwlo8ae" path="res://_example/foot_controller.gd" id="1_rwjbm"]
+[ext_resource type="Texture2D" uid="uid://rfdhlvcp7ql7" path="res://_example/circ.png" id="2_prrc6"]
+[ext_resource type="Texture2D" uid="uid://cd3j2aseai3op" path="res://_example/circ2.png" id="3_6efme"]
+
+[node name="footController" type="Node2D" unique_id=20383955]
+script = ExtResource("1_rwjbm")
+
+[node name="Left Foot" type="Node2D" parent="." unique_id=1155310559]
+
+[node name="Sprite2D" type="Sprite2D" parent="Left Foot" unique_id=1101501278]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_prrc6")
+
+[node name="Right Foot" type="Node2D" parent="." unique_id=1826834343]
+
+[node name="Sprite2D" type="Sprite2D" parent="Right Foot" unique_id=1803945984]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_6efme")

@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bmomjip6buld"]
+
+[ext_resource type="Script" uid="uid://c7f5brm8dvanl" path="res://_example/syn.gd" id="1_38rdq"]
+[ext_resource type="PackedScene" uid="uid://c1pp1kel30348" path="res://_example/foot_controller.tscn" id="2_35e0i"]
+
+[node name="Node2D" type="Node2D" unique_id=330947271]
+
+[node name="SYN" type="Button" parent="." unique_id=1394022762]
+offset_left = 1037.0
+offset_top = 10.0
+offset_right = 1140.0
+offset_bottom = 41.0
+text = "SYN"
+script = ExtResource("1_38rdq")
+
+[node name="footController" parent="." unique_id=20383955 instance=ExtResource("2_35e0i")]
+position = Vector2(1037, 10)
+
+[connection signal="pressed" from="SYN" to="SYN" method="_on_pressed"]

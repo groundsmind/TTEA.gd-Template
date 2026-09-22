@@ -30,7 +30,7 @@ def resource_path(relative_path):
 
     return os.path.join(base_path, relative_path)
 
-tamanho_tela = 800, 600
+tamanho_tela = 1600, 1200
 fps = 60
 
 # Variáveis do Pygame
@@ -38,9 +38,7 @@ WINDOW_NAME = "CIT"
 GAME_TITLE = WINDOW_NAME
 CAMERA = 0
 CAMERA_FLIP = 0
-SCREEN_WIDTH, SCREEN_HEIGHT = 800, 600
-
-CONTADOR = 0
+SCREEN_WIDTH, SCREEN_HEIGHT = 1600, 1200
 
 # Load calibration points from CSV if it exists
 if getattr(sys, 'frozen', False):
@@ -80,22 +78,6 @@ div0_pista = 0
 div1_pista = SCREEN_WIDTH // 3
 div2_pista = 2 * (SCREEN_WIDTH // 3)
 div3_pista = SCREEN_WIDTH
-
-# drawing
-DRAW_HITBOX = False  # will draw all the hitbox
-
-# animation
-ANIMATION_SPEED = 0.01  # the frame of the insects will change every X sec
-
-# difficulty
-GAME_DURATION = 30  # the game will last X sec
-TIME_PAST = 0
-
-TARGETS_SPAWN_TIME = 8
-TARGETS_MOVE_SPEED = 1
-OBSTACLE_PENALITY = (
-    0  # will remove X of the score of the player (if he colides with a obstacle)
-)
 
 # colors
 COLORS = {

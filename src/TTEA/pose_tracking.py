@@ -93,19 +93,14 @@ class PoseTracking:
         self.debug_counter = 0
 
     def scan_feets(self, image):
-        # Flip the image horizontally for a later selfie-view display, and convert
-        # the BGR image to RGB.
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-        # image = cv2.cvtColor(cv2.flip(image, -1), cv2.COLOR_BGR2RGB)
-        # To improve performance, optionally mark the image as not writeable to
-        # pass by reference.
         image.flags.writeable = False
         self.results = self.pose_tracking.process(image)
 
         # Draw the pose annotations on the image.
         image.flags.writeable = True
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-
+        
         self.feet_closed = False
 
         # Debug: confirm frames are actually reaching MediaPipe and show
@@ -143,7 +138,7 @@ class PoseTracking:
             self.debug_counter += 1
             debug = self.debug_counter % 60 == 0
 
-            self.feet_x, self.feet_y = posicao(x, y, debug=False)
+            self.feet_x, self.feet_y = posicao(x, y, debug=True)
 
             mp_drawing.draw_landmarks(
                 image,
