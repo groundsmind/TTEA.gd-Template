@@ -51,7 +51,7 @@ def posicao(x, y, debug=False):
     result = (int(position_x), int(position_y))
 
     if debug:
-        print(f"  Transformed to pygame: {result}")
+        print(f"  Transformed to game coords: {result}")
 
     return result
 

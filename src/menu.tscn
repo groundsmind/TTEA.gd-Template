@@ -1,38 +1,63 @@
 [gd_scene format=3 uid="uid://cn67gecooprai"]
 
+[sub_resource type="GDScript" id="GDScript_lti8b"]
+resource_name = "wawa"
+script/source = "extends Node2D
+
+@onready var label: Label = $Label
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	label.text = str(Server.data)
+"
+
 [sub_resource type="GDScript" id="GDScript_vsb4k"]
 resource_name = "MenuButtons"
 script/source = "extends HBoxContainer
 
 @onready var calibrate: Button = $calibrate
 
-func _on_start_toggled(toggled_on: bool) -> void:
+func _ready() -> void:
+	Server.data_received.connect(_on_server_data_received)
+
+func _on_start_toggled(_toggled_on: bool) -> void:
 	pass # Replace with function body.
 
 func _on_calibrate_pressed() -> void:
-	TteaComm.send_data(\"CAL\")
+	Server.send_data(\"CAL\")
 	calibrate.disabled = true
 
 func _on_exit_pressed() -> void:
-	TteaComm.send_data(\"EXT\")
+	Server.send_data(\"EXT\")
 	get_tree().quit()
+
+func _on_server_data_received(data) -> void:
+	print(data)
+	if data is String and data == \"CAL_OK\":
+		calibrate.disabled = false
 "
 
 [node name="Node2D" type="Node2D" unique_id=870698062]
+script = SubResource("GDScript_lti8b")
 
 [node name="Label" type="Label" parent="." unique_id=61518536]
+custom_minimum_size = Vector2(500, 0)
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 254.0
-offset_top = 40.0
-offset_right = 560.0
-offset_bottom = 207.0
+offset_left = 157.0
+offset_top = 41.0
+offset_right = 636.0
+offset_bottom = 380.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 122
+theme_override_font_sizes/font_size = 41
 text = "treco"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="MenuButtons" type="HBoxContainer" parent="." unique_id=483359193]
 anchors_preset = 8
@@ -40,10 +65,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 103.0
-offset_top = 473.0
-offset_right = 719.0
-offset_bottom = 518.0
+offset_left = 95.0
+offset_top = 471.0
+offset_right = 711.0
+offset_bottom = 516.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_vsb4k")

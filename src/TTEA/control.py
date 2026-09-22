@@ -7,10 +7,11 @@ from calibration import calibrar_ttea
 class Control():
     def __init__(self):
         self.pose_tracking = PoseTracking()
-        self.cap = None
+        self.cap = Camera()
 
     def calibrate(self, skip=False):
         if not skip:
+            self.cap = None
             calibrar_ttea()
             time.sleep(0.3)
         self.cap = Camera()

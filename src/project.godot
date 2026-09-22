@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.7", "Forward Plus")
 
 [autoload]
 
-TteaComm="*uid://bjph3dmlb3l8f"
+Server="*uid://85c5ckx3cda7"
 
 [display]
 
