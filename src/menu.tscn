@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://cn67gecooprai"]
 
+[ext_resource type="Texture2D" uid="uid://du0cghd16hlim" path="res://icon.svg" id="1_lti8b"]
+[ext_resource type="PackedScene" uid="uid://c1pp1kel30348" path="res://_example/foot_controller.tscn" id="2_ouk20"]
+
 [sub_resource type="GDScript" id="GDScript_lti8b"]
 resource_name = "wawa"
 script/source = "extends Node2D
@@ -30,12 +33,26 @@ func _on_calibrate_pressed() -> void:
 
 func _on_exit_pressed() -> void:
 	Server.send_data(\"EXT\")
-	get_tree().quit()
+	Server.stop()
 
 func _on_server_data_received(data) -> void:
 	print(data)
 	if data is String and data == \"CAL_OK\":
 		calibrate.disabled = false
+"
+
+[sub_resource type="GDScript" id="GDScript_g4v7s"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	rotate(0.01)
 "
 
 [node name="Node2D" type="Node2D" unique_id=870698062]
@@ -47,47 +64,51 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 157.0
-offset_top = 41.0
-offset_right = 636.0
-offset_bottom = 380.0
+offset_left = 1061.0
+offset_top = 28.0
+offset_right = 1561.0
+offset_bottom = 367.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 41
 text = "treco"
-horizontal_alignment = 1
-vertical_alignment = 1
+horizontal_alignment = 2
 autowrap_mode = 3
 
 [node name="MenuButtons" type="HBoxContainer" parent="." unique_id=483359193]
+custom_minimum_size = Vector2(200, 0)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 95.0
-offset_top = 471.0
-offset_right = 711.0
-offset_bottom = 516.0
+offset_left = 13.0
+offset_top = 21.0
+offset_right = 813.0
+offset_bottom = 111.0
 grow_horizontal = 2
 grow_vertical = 2
 script = SubResource("GDScript_vsb4k")
 
-[node name="start" type="Button" parent="MenuButtons" unique_id=484011405]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-text = "começar jogo"
-
 [node name="calibrate" type="Button" parent="MenuButtons" unique_id=544874297]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "calibrar"
 
 [node name="exit" type="Button" parent="MenuButtons" unique_id=1062811593]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 32
 text = "sair"
 
-[connection signal="toggled" from="MenuButtons/start" to="MenuButtons" method="_on_start_toggled"]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019381373]
+position = Vector2(1428, 1033)
+scale = Vector2(1.6323246, 1.6861377)
+texture = ExtResource("1_lti8b")
+script = SubResource("GDScript_g4v7s")
+
+[node name="footController" parent="." unique_id=20383955 instance=ExtResource("2_ouk20")]
+
 [connection signal="pressed" from="MenuButtons/calibrate" to="MenuButtons" method="_on_calibrate_pressed"]
 [connection signal="pressed" from="MenuButtons/exit" to="MenuButtons" method="_on_exit_pressed"]

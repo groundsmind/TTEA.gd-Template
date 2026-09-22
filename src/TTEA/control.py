@@ -11,6 +11,11 @@ class Control():
 
     def calibrate(self, skip=False):
         if not skip:
+            if self.cap is not None:
+                try:
+                    self.cap.close_camera()
+                except Exception:
+                    pass
             self.cap = None
             calibrar_ttea()
             time.sleep(0.3)

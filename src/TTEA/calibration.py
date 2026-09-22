@@ -5,11 +5,11 @@
 #################################################################################
 import csv
 import cv2
-# import mediapipe as mp
 import numpy as np
 import pygame
 import time
 import random
+import settings
 from settings import resource_path
 
 pygame.init()
@@ -69,7 +69,7 @@ fonte = cv2.FONT_HERSHEY_SIMPLEX
 #################################################################################
 ############################# VARIÁVEIS DE PROGRAMA #############################
 #################################################################################
-pontos_calibracao = np.zeros((4, 2), int)  # Matriz para os pontos de calibração de perspectiva - 4 linhas/ 2 colunas
+pontos_calibracao = settings.pontos_calibracao  # Matriz para os pontos de calibração de perspectiva - 4 linhas/ 2 colunas
 contador = 0  # Contador utilizado nos 4 pontos de calibração
 figura_selecionada=False # Usada para evitar que o usuário apenas selecione uma vez a figura e não ficar piscando
 x_pose = 0
