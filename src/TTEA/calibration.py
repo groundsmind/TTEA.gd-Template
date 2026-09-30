@@ -10,9 +10,14 @@ import pygame
 import time
 import random
 import settings
-from settings import resource_path
+import os
+from pathlib import Path
+from client import Client
 
-pygame.init()
+CURR_FILE = Path(__file__).resolve()
+PROJECT_ROOT = CURR_FILE.parent
+
+client = Client()
 #################################################################################
 ################################## Hora de Inicio ###############################
 #################################################################################
@@ -49,10 +54,10 @@ csv.register_dialect(
 #################################################################################
 ################################## SPRITES ######################################
 #################################################################################
-icone_fig=pygame.image.load(resource_path('assets/icone.png'))
-avisos_fig=pygame.image.load(resource_path('assets/avisos.png'))
-instrucao_calibrar_fig=pygame.image.load(resource_path('assets/calibrar.png'))
-calibracao_finalizada_fig=pygame.image.load(resource_path('assets/calibracao_ok.png'))
+icone_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'icone.png'))
+avisos_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'avisos.png'))
+instrucao_calibrar_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'calibrar.png'))
+calibracao_finalizada_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'calibracao_ok.png'))
 
 #################################################################################
 ################################## CORES & FONTES ###############################
@@ -88,34 +93,8 @@ def calibrar_ttea():
     resetar_vars()
 
     camera = cv2.VideoCapture(0)
-
-    gameWarning = pygame.display.set_mode((largura_projetor, altura_projetor))
-    pygame.display.set_caption('T-TEA')
-    pygame.display.set_icon(icone_fig)
-    gameWarning.blit(avisos_fig,(0, 0))
-    gameWarning=False
-    gameExit=False # Sai do completamente do jogo
-
-    while not gameWarning:
-        for event in pygame.event.get():
-            # SAIR ou CONCORDO
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
-                    gameDisplay = pygame.display.set_mode((largura_projetor, altura_projetor))
-                    pygame.display.set_caption('T-TEA')
-                    pygame.display.set_icon(icone_fig)
-                    instrucao_calibrar()
-                    gameWarning=True
-                if event.key == pygame.K_q:
-                    gameExit = True
-                    cv2.destroyWindow('tela_de_controle')
-                    pygame.quit()
-                    camera.release()
-                    gameWarning = True
-                    exit()
-
-        pygame.display.update()
-
+    gameExit=False
+    cal_ok_sent = False
 
     #################################################################################
     #################### Inicialização do MediaPipe e Calibração ####################
@@ -138,12 +117,10 @@ def calibrar_ttea():
                 cv2.line(tela_de_controle, (pontos_calibracao[2]), (pontos_calibracao[0]), (verde), 2)
                 cv2.line(tela_de_controle, (pontos_calibracao[2]), (pontos_calibracao[3]), (verde), 2)
 
-                gameDisplay = pygame.display.set_mode((largura_projetor, altura_projetor))
-                pygame.display.set_caption('Calibracao')
-                pygame.display.set_icon(icone_fig)
 
-                calibracao_ok()
-                pygame.display.update()
+                if not cal_ok_sent:
+                    client.send("CAL_OK")
+                    cal_ok_sent = True
                 pass
             
 
@@ -152,6 +129,14 @@ def calibrar_ttea():
             cv2.setMouseCallback("TELA DE CONTROLE", mousePoints)
             cv2.waitKey(1)
 
+            if client.receive() == "CAL_ACK":
+                gameExit = True
+                cv2.destroyWindow("TELA DE CONTROLE")
+                grava_calibracao()
+                print('P1: ', pontos_calibracao[0], ' P2: ', pontos_calibracao[1], ' P3: ', pontos_calibracao[2], ' P4: ', pontos_calibracao[3])
+                camera.release()
+
+            '''
             # Teclas de Atalho
             for event in pygame.event.get():
                 # SAIR
@@ -181,28 +166,13 @@ def calibrar_ttea():
                         print('P1: ', pontos_calibracao[0], ' P2: ', pontos_calibracao[1], ' P3: ', pontos_calibracao[2], ' P4: ', pontos_calibracao[3])
                         pygame.display.quit()
                         camera.release()
+            '''
 
 
 
 #################################################################################
 ################################### FUNÇÕES #####################################
 #################################################################################
-def avisos(): #Tela inicial com os avisos do equipamento
-    global gameDisplay
-    gameDisplay.blit(avisos_fig,(0, 0))
-
-def instrucao_calibrar():
-    global gameDisplay
-    gameDisplay.blit(instrucao_calibrar_fig, (0, 0))
-
-
-def calibracao_ok():
-    global gameDisplay
-    gameDisplay.blit(calibracao_finalizada_fig, (0, 0))
-
-def fill_preto():
-    global gameDisplay
-    gameDisplay.fill(preto)
 
 def mousePoints(event, x, y, flags, params):
     # Função para capturar cliques do Mouse:

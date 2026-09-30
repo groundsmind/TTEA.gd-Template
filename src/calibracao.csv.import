@@ -2,11 +2,11 @@
 
 importer="csv_translation"
 type="Translation"
-uid="uid://bdhj1fik8umi0"
+uid="uid://h34y8f805xhv"
 
 [deps]
 
-source_file="res://TTEA/calibracao.csv"
+source_file="res://calibracao.csv"
 
 [params]
 

@@ -12,7 +12,7 @@ func _ready() -> void:
 	server = UDPServer.new()
 	server.listen(4242)
 	print("Server started at port ", server.get_local_port())
-	python_pid = OS.execute(get_py_interpreter_path(), [get_py_script_path()], [], false, true)
+	python_pid = OS.create_process(get_py_interpreter_path(), [get_py_script_path()], true)
 	print(python_pid)
 
 func _process(_delta) -> void:
@@ -30,13 +30,12 @@ func _process(_delta) -> void:
 		while client.get_available_packet_count() > 0:
 			var packet: PackedByteArray = client.get_packet()
 			data = JSON.parse_string(packet.get_string_from_utf8())
-			send_data("ACK")
 			data_received.emit(data)
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if python_pid > 0:
-			print("Terminating Python background process...")
+			print("Terminating Python process...")
 			OS.kill(python_pid)
 
 func stop() -> void:

@@ -12,15 +12,13 @@ if __name__ == "__main__":
             feet_pos['left'], feet_pos['right'] = pose_ctrl.track()
             client.send(feet_pos)
 
-            arg = None
-            arg = client.receive()
-            if not arg:
+            msg = client.poll()
+            if msg is None:
                 continue
-            msg = arg
+            print(f"Received: {msg}")
             match msg:
                 case "CAL":
                     pose_ctrl.calibrate()
-                    client.send("CAL_OK")
                 case "EXT":
                     break
     except KeyboardInterrupt:
