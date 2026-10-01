@@ -8,3 +8,4 @@ build
 calibracao.csv
 .conda/
 .venv/
+*.tmp
