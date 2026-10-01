@@ -9,10 +9,9 @@ script/source = "extends Node2D
 
 @onready var label: Label = $Label
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	label.text = str(Server.data)
+	if Server.data is Dictionary:
+		label.text = str(Server.data['pos']) + \"\\n @\" + str(Server.delay_ms) + \"ms\"
 "
 
 [sub_resource type="GDScript" id="GDScript_vsb4k"]

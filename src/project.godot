@@ -13,6 +13,7 @@ config_version=5
 config/name="TTEA.gd - Template"
 run/main_scene="res://DebugScene.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
+config/icon="uid://80876face0o4"
 
 [autoload]
 

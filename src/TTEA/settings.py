@@ -1,6 +1,5 @@
 import os
 import sys
-import pygame
 import numpy as np
 import cv2
 from typing import Literal
@@ -31,11 +30,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 tamanho_tela = 1600, 1200
-fps = 60
 
-# Variáveis do Pygame
-WINDOW_NAME = "CIT"
-GAME_TITLE = WINDOW_NAME
 CAMERA = 0
 CAMERA_FLIP = 0
 SCREEN_WIDTH, SCREEN_HEIGHT = 1600, 1200
@@ -50,7 +45,7 @@ else:
     # '__file__' é o caminho para o 'jogo.py'
     base_dir = os.path.dirname(os.path.abspath(__file__))
     
-csv_path = os.path.join(base_dir, "calibracao.csv")
+csv_path = os.path.join("TTEA/calibracao.csv")
 if os.path.exists(csv_path):
     try:
         import csv
@@ -96,15 +91,6 @@ COLORS = {
 MUSIC_VOLUME = 0  # value between 0 and 1
 SOUNDS_VOLUME = 1
 
-# fonts
-pygame.font.init()
-FONTS = {}
-FONTS["small"] = pygame.font.Font(None, 10)
-FONTS["medium"] = pygame.font.Font(None, 25)
-FONTS["big"] = pygame.font.Font(None, 50)
-
-#
-
 #################################################################################
 ################################## CORES & FONTES ###############################
 #################################################################################
@@ -116,7 +102,6 @@ branco = 255, 255, 255
 preto = 0, 0, 0
 
 fonte = cv2.FONT_HERSHEY_SIMPLEX
-font = pygame.font.SysFont(None, 25)
 
 
 #################################################################################

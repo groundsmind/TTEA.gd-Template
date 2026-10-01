@@ -17,8 +17,9 @@ var scr_size_x = 1600
 var scr_size_y = 1200
 
 func _process(delta: float) -> void:
-	if get_data() is Dictionary:
-		feet_pos = get_data()
+	if Server.data is Dictionary:
+		feet_pos = Server.data['pos']
+		print(feet_pos)
 	if feet_pos["left"][0] != null:
 		var left_pos = Vector2(feet_pos["left"][0], (feet_pos["left"][1]) - vertical_offset)
 		var right_pos = Vector2(feet_pos["right"][0], (feet_pos["right"][1]) - vertical_offset)
@@ -32,7 +33,3 @@ func _process(delta: float) -> void:
 		midpoint.global_position = left_foot.global_position.lerp(right_foot.global_position, 0.5)
 		left_label.text = str(left_pos)
 		right_label.text = str(right_pos)
-
-func get_data():
-	var data = Server.data
-	return data

@@ -2,7 +2,7 @@ import cv2
 import mediapipe as mp
 import numpy as np
 
-from settings import *
+from settings import pontos_calibracao, largura_webcam, altura_webcam, largura_projetor, altura_projetor
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles

@@ -5,6 +5,10 @@ var server: UDPServer
 var client: PacketPeerUDP
 var data
 var python_pid
+var last_packet_ms: float = 0
+var delay_ms: float
+var avg_delay_ms := 0.0
+var last_t: float = 0.0
 
 signal data_received
 
@@ -28,9 +32,22 @@ func _process(_delta) -> void:
 			send_data("ACK")
 	if client:
 		while client.get_available_packet_count() > 0:
-			var packet: PackedByteArray = client.get_packet()
-			data = JSON.parse_string(packet.get_string_from_utf8())
+			var now := Time.get_ticks_msec()
+			var packet: String = client.get_packet().get_string_from_utf8()
+			data = JSON.parse_string(packet)
 			data_received.emit(data)
+			
+			if typeof(data) == TYPE_DICTIONARY:
+				if data.has("t"):
+					var t: float = data["t"]
+					if last_t != 0.0:
+						delay_ms = (t - last_t) * 1000.0
+					last_t = t
+					if last_packet_ms != 0:
+						delay_ms = now - last_packet_ms
+					last_packet_ms = now
+					avg_delay_ms = lerp(avg_delay_ms, float(delay_ms), 0.1)
+
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
