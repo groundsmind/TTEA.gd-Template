@@ -6,18 +6,14 @@
 import csv
 import cv2
 import numpy as np
-import pygame
 import time
 import random
 import settings
 import os
 from pathlib import Path
-from client import Client
 
 CURR_FILE = Path(__file__).resolve()
 PROJECT_ROOT = CURR_FILE.parent
-
-client = Client()
 #################################################################################
 ################################## Hora de Inicio ###############################
 #################################################################################
@@ -50,15 +46,6 @@ csv.register_dialect(
     lineterminator = '\n',
     quoting = csv.QUOTE_MINIMAL)
 
-
-#################################################################################
-################################## SPRITES ######################################
-#################################################################################
-icone_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'icone.png'))
-avisos_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'avisos.png'))
-instrucao_calibrar_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'calibrar.png'))
-calibracao_finalizada_fig=pygame.image.load(str(PROJECT_ROOT / 'assets' / 'calibracao_ok.png'))
-
 #################################################################################
 ################################## CORES & FONTES ###############################
 #################################################################################
@@ -86,7 +73,7 @@ def resetar_vars():
     contador = 0
 
 
-def calibrar_ttea():
+def calibrar_ttea(client):
 
     global gameDisplay#, x_pose, y_pose
 
@@ -129,7 +116,8 @@ def calibrar_ttea():
             cv2.setMouseCallback("TELA DE CONTROLE", mousePoints)
             cv2.waitKey(1)
 
-            if client.receive() == "CAL_ACK":
+            msg = client.poll()
+            if msg == "CAL_ACK":
                 gameExit = True
                 cv2.destroyWindow("TELA DE CONTROLE")
                 grava_calibracao()

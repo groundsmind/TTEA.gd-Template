@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmomjip6buld"]
 
-[ext_resource type="Script" uid="uid://c7f5brm8dvanl" path="res://_example/syn.gd" id="1_38rdq"]
-[ext_resource type="PackedScene" uid="uid://c1pp1kel30348" path="res://_example/foot_controller.tscn" id="2_35e0i"]
+[ext_resource type="Script" path="res://_example/syn.gd" id="1_38rdq"]
+[ext_resource type="PackedScene" uid="uid://c1pp1kel30348" path="res://foot_tracking/foot_controller.tscn" id="2_35e0i"]
 
 [node name="Node2D" type="Node2D" unique_id=330947271]
 

@@ -5,9 +5,10 @@ from pose_tracking import PoseTracking
 from calibration import calibrar_ttea
 
 class Control():
-    def __init__(self):
+    def __init__(self, client):
         self.pose_tracking = PoseTracking()
         self.cap = Camera()
+        self.client = client
 
     def calibrate(self, skip=False):
         if not skip:
@@ -17,7 +18,7 @@ class Control():
                 except Exception:
                     pass
             self.cap = None
-            calibrar_ttea()
+            calibrar_ttea(self.client)
             time.sleep(0.3)
         self.cap = Camera()
 
@@ -37,9 +38,10 @@ class Control():
         self.cap.load_camera()
         self.get_feet_position()
         self.cap.display_camera()
-        left_foot_x, left_foot_y = self.pose_tracking.get_left_foot()
-        right_foot_x, right_foot_y = self.pose_tracking.get_right_foot()
-        return((left_foot_x, left_foot_y), (right_foot_x, right_foot_y))
+        left_foot = self.pose_tracking.get_left_foot()
+        right_foot = self.pose_tracking.get_right_foot()
+        print((left_foot, right_foot))
+        return(left_foot, right_foot)
 
 if __name__ == "__main__":
     import sys

@@ -138,7 +138,7 @@ class PoseTracking:
             self.debug_counter += 1
             debug = self.debug_counter % 60 == 0
 
-            self.feet_x, self.feet_y = posicao(x, y, debug=True)
+            self.feet_x, self.feet_y = posicao(x, y)
 
             mp_drawing.draw_landmarks(
                 image,

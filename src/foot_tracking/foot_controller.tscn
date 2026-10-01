@@ -1,8 +1,32 @@
 [gd_scene format=3 uid="uid://c1pp1kel30348"]
 
-[ext_resource type="Script" uid="uid://2w8odxwlo8ae" path="res://_example/foot_controller.gd" id="1_rwjbm"]
-[ext_resource type="Texture2D" uid="uid://rfdhlvcp7ql7" path="res://_example/circ.png" id="2_prrc6"]
-[ext_resource type="Texture2D" uid="uid://cd3j2aseai3op" path="res://_example/circ2.png" id="3_6efme"]
+[ext_resource type="Script" uid="uid://2w8odxwlo8ae" path="res://foot_tracking/foot_controller.gd" id="1_rwjbm"]
+
+[sub_resource type="Gradient" id="Gradient_5x15e"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.5301205, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xu061"]
+gradient = SubResource("Gradient_5x15e")
+width = 500
+height = 500
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_1ta0i"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.5301205, 1)
+colors = PackedColorArray(0, 0, 1, 1, 0, 0, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vpxbj"]
+gradient = SubResource("Gradient_1ta0i")
+width = 500
+height = 500
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_prrc6"]
 offsets = PackedFloat32Array(0.53614455, 0.60240966)
@@ -20,8 +44,8 @@ script = ExtResource("1_rwjbm")
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Left Foot" unique_id=1101501278]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_prrc6")
+scale = Vector2(0.75, 0.75)
+texture = SubResource("GradientTexture2D_xu061")
 
 [node name="Label" type="Label" parent="Left Foot/Sprite2D" unique_id=1139226524]
 offset_left = 210.0
@@ -35,8 +59,8 @@ text = "1256.0, 1250.0"
 scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="Right Foot" unique_id=1803945984]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("3_6efme")
+scale = Vector2(0.75, 0.75)
+texture = SubResource("GradientTexture2D_vpxbj")
 
 [node name="Label" type="Label" parent="Right Foot/Sprite2D" unique_id=1859875966]
 offset_left = 210.0

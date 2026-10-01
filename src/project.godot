@@ -10,20 +10,22 @@ config_version=5
 
 [application]
 
-config/name="EGJ26"
-run/main_scene="res://menu.tscn"
+config/name="TTEA.gd - Template"
+run/main_scene="res://DebugScene.tscn"
 config/features=PackedStringArray("4.7", "Forward Plus")
 
 [autoload]
 
 Server="*uid://85c5ckx3cda7"
+SceneSwitch="*uid://dmba3lmopdfp8"
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=1200
-window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
+window/size/mode=3
+window/size/initial_position_type=3
+window/stretch/mode="viewport"
 
 [physics]
 

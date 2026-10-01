@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 			if Input.is_key_pressed(KEY_Q):
 				print(\"calibração terminada\")
 				Server.send_data(\"CAL_ACK\")
-				SceneSwitch.switch_to_previous()
+				get_tree().change_scene_to_file(\"res://menu.tscn\")
 
 func switch_state(new_state: String) -> void:
 	state = new_state
@@ -41,7 +41,6 @@ func switch_state(new_state: String) -> void:
 
 func _on_server_data_received(data) -> void:
 	if data is String and data == \"CAL_OK\":
-		print(\"calibration over !! :)\")
 		switch_state(\"calibracao_ok\")
 "
 
@@ -49,6 +48,7 @@ func _on_server_data_received(data) -> void:
 script = SubResource("GDScript_ffumr")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=811838429]
-position = Vector2(800, 600)
 scale = Vector2(2, 2)
 texture = ExtResource("1_ffumr")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=315147868]

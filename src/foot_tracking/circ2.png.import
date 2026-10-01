@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rfdhlvcp7ql7"
-path="res://.godot/imported/circ.png-34410ffb629c77c43ccc5a2c86062cb6.ctex"
+uid="uid://cd3j2aseai3op"
+path="res://.godot/imported/circ2.png-8409bc39537e64aed84f98bbf6765fe0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://_example/circ.png"
-dest_files=["res://.godot/imported/circ.png-34410ffb629c77c43ccc5a2c86062cb6.ctex"]
+source_file="res://foot_tracking/circ2.png"
+dest_files=["res://.godot/imported/circ2.png-8409bc39537e64aed84f98bbf6765fe0.ctex"]
 
 [params]
 

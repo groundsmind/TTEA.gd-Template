@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cn67gecooprai"]
 
-[ext_resource type="Texture2D" uid="uid://du0cghd16hlim" path="res://icon.svg" id="1_lti8b"]
-[ext_resource type="PackedScene" uid="uid://c1pp1kel30348" path="res://_example/foot_controller.tscn" id="2_ouk20"]
+[ext_resource type="Texture2D" uid="uid://du0cghd16hlim" path="res://icon.svg" id="1_pfeqe"]
+[ext_resource type="PackedScene" uid="uid://c1pp1kel30348" path="res://foot_tracking/foot_controller.tscn" id="2_47f4b"]
 
 [sub_resource type="GDScript" id="GDScript_lti8b"]
 resource_name = "wawa"
@@ -23,21 +23,17 @@ script/source = "extends HBoxContainer
 
 func _on_calibrate_pressed() -> void:
 	calibrate.disabled = true
-	get_tree().change_scene_to_file(\"res://calibrate.tscn\")
+	SceneSwitch.switch_scene(\"res://calibrate.tscn\")
 
 func _on_exit_pressed() -> void:
 	Server.send_data(\"EXT\")
 	Server.stop()
 "
 
-[sub_resource type="GDScript" id="GDScript_g4v7s"]
-script/source = "extends Sprite2D
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g4v7s"]
+size = Vector2(118.84888, 117.4281)
 
-func _process(_delta: float) -> void:
-	rotate(0.01)
-"
-
-[node name="Node2D" type="Node2D" unique_id=870698062]
+[node name="DebugScene" type="Node2D" unique_id=870698062]
 script = SubResource("GDScript_lti8b")
 
 [node name="Label" type="Label" parent="." unique_id=61518536]
@@ -84,13 +80,21 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "sair"
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2019381373]
+[node name="Sprite2D" type="StaticBody2D" parent="." unique_id=827825886]
 position = Vector2(1428, 1033)
 scale = Vector2(1.6323246, 1.6861377)
-texture = ExtResource("1_lti8b")
-script = SubResource("GDScript_g4v7s")
 
-[node name="footController" parent="." unique_id=20383955 instance=ExtResource("2_ouk20")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D" unique_id=1187771821]
+shape = SubResource("RectangleShape2D_g4v7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D" unique_id=1607427401]
+texture = ExtResource("1_pfeqe")
+
+[node name="footController" parent="." unique_id=20383955 instance=ExtResource("2_47f4b")]
+offset_threshold = 10.0
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1375520766]
+anchor_mode = 0
 
 [connection signal="pressed" from="MenuButtons/calibrate" to="MenuButtons" method="_on_calibrate_pressed"]
 [connection signal="pressed" from="MenuButtons/exit" to="MenuButtons" method="_on_exit_pressed"]
